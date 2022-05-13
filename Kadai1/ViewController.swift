@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBAction func tappedSumButtom(_ sender: Any) {
         sumResultLabel.text = String(
             textFieldCollection
-                .map { Int($0.text!) ?? 0 }
+                .compactMap { Int($0.text!) }
                 .reduce(0, +)
         )
     }
