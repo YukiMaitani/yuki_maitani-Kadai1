@@ -9,15 +9,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet var textFieldCollection: [UITextField]!
-    @IBOutlet weak var sumResultLabel: UILabel!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+    @IBOutlet private var textFieldCollection: [UITextField]!
+    @IBOutlet private weak var sumResultLabel: UILabel!
+
     //UITextField.text?にはデフォルトで""が入っているので強制アンラッピングして、""をInt型にするとnilになるのでreduceで足すときにはnilの場合は0になるようにしている
     @IBAction func tappedSumButtom(_ sender: Any) {
-        sumResultLabel.text = String(textFieldCollection.map{Int($0.text!)}.reduce(0){$0 + ($1 ?? 0)})
+        let total = textFieldCollection
+            .map { Int($0.text!) ?? 0 }
+            .reduce(0, +)
+        
+        sumResultLabel.text = String(total)
     }
     
 }
